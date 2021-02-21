@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 const thumbsupply = require('thumbsupply');
-const port = process.env.PORT || 4000
+const port = 4000//process.env.PORT || 4000
 
 const videos = [
     {
