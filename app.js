@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 const thumbsupply = require('thumbsupply');
+const port = process.env.PORT || 4000
 
 const videos = [
     {
@@ -63,14 +64,14 @@ app.get('/video/:id', (req, res) => {
         fs.createReadStream(path).pipe(res);
     }
 });
+
+app.use(cors());
+app.get('/videos', (req, res) => res.json(videos));
 app.get('/video/:id/poster', (req, res) => {
     thumbsupply.generateThumbnail(`assets/${req.params.id}.mp4`)
     .then(thumb => res.sendFile(thumb));
 });
 
-app.use(cors());
-app.get('/videos', (req, res) => res.json(videos));
-
-app.listen(4000, () => {
-    console.log('Listening on port 4000!')
+app.listen(port, () => {
+    console.log('Listening on port'+port+'!')
 });
