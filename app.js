@@ -67,7 +67,9 @@ app.get('/video/:id', (req, res) => {
 
 app.use(cors());
 app.get('/videos', (req, res) => res.json(videos));
+
 app.get('/video/:id/poster', (req, res) => {
+    console.log('calling thumbnail generator')
     thumbsupply.generateThumbnail(`assets/${req.params.id}.mp4`)
     .then(thumb => res.sendFile(thumb));
 });
